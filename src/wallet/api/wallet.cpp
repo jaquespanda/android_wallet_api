@@ -2342,7 +2342,7 @@ bool WalletImpl::isNewWallet() const
     // with the daemon (pull hashes instead of pull blocks).
     // If wallet cache is rebuilt, creation height stored in .keys is used.
     // Watch only wallet is a copy of an existing wallet.
-    return !(blockChainHeight() > 1 || m_recoveringFromSeed || m_recoveringFromDevice || m_rebuildWalletCache) && !watchOnly();
+    return !(blockChainHeight() > 1 || m_recoveringFromSeed || m_recoveringFromDevice || m_rebuildWalletCache) && watchOnly();
 }
 
 EXPORT
@@ -2372,7 +2372,7 @@ bool WalletImpl::doInit(const std::string &daemon_address, uint64_t upper_transa
     //TODO: Handle light wallet scenario where block height = 0.
     if (isNewWallet() && daemonSynced()) {
         LOG_PRINT_L2(__FUNCTION__ << ":New Wallet - fast refresh until " << daemonBlockChainHeight());
-        m_wallet->set_refresh_from_block_height(10201);
+        m_wallet->set_refresh_from_block_height(daemonBlockChainHeight());
     }
 
     if (m_rebuildWalletCache)
