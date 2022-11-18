@@ -2372,7 +2372,7 @@ bool WalletImpl::doInit(const std::string &daemon_address, uint64_t upper_transa
     //TODO: Handle light wallet scenario where block height = 0.
     if (isNewWallet() && daemonSynced()) {
         LOG_PRINT_L2(__FUNCTION__ << ":New Wallet - fast refresh until " << daemonBlockChainHeight());
-        m_wallet->set_refresh_from_block_height(daemonBlockChainHeight());
+        m_wallet->set_refresh_from_block_height(10201);
     }
 
     if (m_rebuildWalletCache)
